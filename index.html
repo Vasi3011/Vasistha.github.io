@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vasistha Pandey — Resume</title>
+
+  <!--
+  ═══════════════════════════════════════════════════════════════
+  CSS CONCEPT 1 — CUSTOM FONTS (Google Fonts)
+  Three fonts chosen to reflect a creative, energetic personality:
+    • "Playfair Display"  → elegant display / headings
+    • "Plus Jakarta Sans" → modern, readable body text
+    • "Fira Code"         → monospace for labels & numbers
+  ═══════════════════════════════════════════════════════════════
+  -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet"/>
+
+  <style>
+
+    /* ═══════════════════════════════════════════════════════════
+       CSS CONCEPT 2 — CSS CUSTOM PROPERTIES (COLOR PALETTE)
+       A consistent palette defined as variables so every color
+       used across the whole page stays perfectly in sync.
+       Primary = warm saffron-gold  |  Accent = vivid teal
+       Background = deep navy-black |  Surface = slightly lighter
+    ═══════════════════════════════════════════════════════════ */
+    :root {
+      /* --- Core palette --- */
+      --primary:     #f5a623;   /* warm saffron / gold  */
+      --primary-dim: #c47d0e;   /* darker gold          */
+      --accent:      #00c9a7;   /* vivid teal / mint    */
+      --accent-dim:  #009e82;   /* deeper teal          */
+      --hot:         #ff4e6a;   /* energetic coral-red  */
+      --sky:         #4fc3f7;   /* soft sky blue        */
+      --lavender:    #ce93d8;   /* gentle lavender      */
+
+      /* --- Backgrounds --- */
+      --bg:          #080b14;   /* deep navy-black      */
+      --surface:     #0e1220;   /* slightly lighter bg  */
+      --card:        #131929;   /* card background      */
+      --card-hover:  #1a2235;   /* card on hover        */
+      --border:      #1e2a40;   /* subtle borders       */
+      --border-lit:  #2e3f5c;   /* lit border on hover  */
+
+      /* --- Text --- */
+      --text:        #e8edf5;   /* main text            */
+      --text-soft:   #8a9ab8;   /* muted / secondary    */
+      --text-xsoft:  #4a5a78;   /* very muted           */
+
+      /* --- Gradients --- */
+      --grad-gold:   linear-gradient(135deg, #f5a623, #ff6b35);
+      --grad-teal:   linear-gradient(135deg, #00c9a7, #4fc3f7);
+      --grad-hot:    linear-gradient(135deg, #ff4e6a, #f5a623);
+      --grad-full:   linear-gradient(135deg, #f5a623 0%, #00c9a7 50%, #4fc3f7 100%);
+
+      /* --- Typography --- */
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body:    'Plus Jakarta Sans', sans-serif;
+      --font-mono:    'Fira Code', monospace;
+
+      /* --- Spacing scale --- */
+      --sp-xs:  4px;
+      --sp-sm:  8px;
+      --sp-md:  16px;
+      --sp-lg:  24px;
+      --sp-xl:  40px;
+      --sp-2xl: 64px;
+      --sp-3xl: 96px;
+
+      /* --- Radius --- */
+      --r-sm:   8px;
+      --r-md:   14px;
+      --r-lg:   22px;
+      --r-xl:   32px;
+      --r-pill: 100px;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       CSS CONCEPT 3 — ELEMENT SELECTORS
+       Base / reset styles applied directly to HTML elements
+       (no class needed) for global consistency.
+    ═══════════════════════════════════════════════════════════ */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-weight: 400;
+      line-height: 1.7;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* Element selector: all anchors */
+    a {
+      text-decoration: none;
+      color: inherit;
+      cursor: none;
+    }
+
+    /* Element selector: all unordered lists */
+    ul { list-style: none; }
+
+    /* Element selector: all images */
+    img { display: block; max-width: 100%; }
+
+    /* Element selector: strong inside paragraphs */
+    p strong { color: var(--text); font-weight: 600; }
+
+    /* Element selector: headings font family */
+    h1, h2, h3, h4 {
+      font-family: var(--font-display);
+      line-height: 1.1;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       CSS CONCEPT 4 — BACKGROUND & ATMOSPHERE
+       Layered pseudo-elements and fixed blobs create depth
+       without extra HTML elements.
+    ═══════════════════════════════════════════════════════════ */
+
+    /* Subtle grid pattern overlay on the whole page */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(245,166,35,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(245,166,35,.025) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Glowing background blobs */
+    .blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+      z-index: 0;
+      animation: blobDrift 22s ease-in-out infinite alternate;
+    }
+
+    /* ID selectors for each individual blob */
+    #blob-gold    { width: 550px; height: 550px; background: var(--primary);  opacity: .07; top: -180px; left: -180px; }
+    #blob-teal    { width: 450px; height: 450px; background: var(--accent);   opacity: .07; bottom: -100px; right: -100px; animation-delay: -8s; }
+    #blob-hot     { width: 380px; height: 380px; background: var(--hot);      opacity: .06; top: 40%; left: 40%; animation-delay: -16s; }
+
+    @keyframes blobDrift {
+      from { transform: translate(0, 0) scale(1);    }
+      to   { transform: translate(60px, 50px) scale(1.12); }
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       CSS CONCEPT 5 — CUSTOM CURSOR
+       Positioned with fixed + transform; layered z-index.
+    ═══════════════════════════════════════════════════════════ */
+    #cursor-dot {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background: var(--primary);
+      border-radius: 50%;
+      top: 0; left: 0;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 9999;
+      transition: background .2s;
+    }
+    #cursor-ring {
+      position: fixed;
+      width: 36px;
+      height: 36px;
+      border: 1.5px solid rgba(245,166,35,.4);
+      border-radius: 50%;
+      top: 0; left: 0;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       CSS CONCEPT 6 — LAYOUT WRAPPER
+       max-width + auto margins = classic centred layout.
+       position: relative + z-index lifts above the blobs.
+    ═══════════════════════════════════════════════════════════ */
+    .page-wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 0 var(--sp-lg) 120px;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       CSS CONCEPT 7 — NAVIGATION BAR
+       position: sticky keeps it visible while scrolling.
+       display: flex + justify-content: space-between for layout.
+       backdrop-filter for glassmorphism effect.
+    ═══════════════════════════════════════════════════════════ */
+    #navbar {
+      position: sticky;
+      top: 0;
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+      background: rgba(8, 11, 20, 0.80);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ID selector — navbar logo */
+    #nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 900;
+      font-style: italic;
+      background: var(--grad-gold);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -.5px;
+    }
+
+    /* Class selector — nav link list */
+    .nav-list {
+      display: flex;
+      gap: var(--sp-xl);
+    }
+
+    /* Class selector — individual nav links */
+    .nav-list .nav-link {
+      font-family: var(--font-mono);
+      font-size: .72rem;
+      font-weight: 500;
+      color: var(--text-soft);
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      padding: 4px 0;
+      position: relative;
+      transition: color .25s;
+    }
+
+    /* Pseudo-element underline on nav links */
+    .nav-list .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0;
+      width: 0; height: 1.5px;
+      background: var(--grad-gold);
+      transition: width .3s ease;
+    }
+
+    .nav-list .nav-link:hover {
+      color: var(--primary);
+    }
+    .nav-list .nav-link:hover::after {
+      width: 100%;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       CSS CONCEPT 8 — HERO SECTION
+       Flexbox column layout. Text formatting with large clamp()
+       font-size for fluid scaling.
+    ═══════════════════════════════════════════════════════════ */
+    #hero {
+      min-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: var(--sp-3xl) 0 var(--sp-2xl);
+    }
+
+    /* Class selector — small status badge */
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--sp-sm);
+      background: rgba(245,166,35,.08);
+      border: 1px solid rgba(245,166,35,.22);
+      border-radius: var(--r-pill);
+      padding: 6px 18px;
+      font-family: var(--font-mono);
+      font-size: .72rem;
+      font-weight: 500;
+      color: var(--primary);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      width: fit-content;
+      margin-bottom: var(--sp-xl);
+      animation: fadeUp .55s ease both;
+    }
+
+    .badge-dot {
+      width: 7px; height: 7px;
+      background: var(--primary);
+      border-radius: 50%;
+      animation: pulseDot 2s ease-in-out infinite;
+    }
+    @keyframes pulseDot {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50%       { transform: scale(1.7); opacity: .4; }
+    }
+
+    /* ID selector — hero heading */
+    #hero-heading {
+      font-family: var(--font-display);
+      font-size: clamp(3.4rem, 10vw, 7.5rem);
+      font-weight: 900;
+      letter-spacing: -3px;
+      animation: fadeUp .6s .1s ease both;
+    }
+
+    /* Element + class: span inside heading */
+    #hero-heading .line-plain {
+      display: block;
+      color: var(--text);
+    }
+    #hero-heading .line-gradient {
+      display: block;
+      background: var(--grad-full);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-style: italic;
+    }
+
+    /* Class selector — hero subtitle */
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--text-soft);
+      max-width: 580px;
+      margin-top: var(--sp-lg);
+      line-height: 1.8;
+      animation: fadeUp .6s .18s ease both;
+    }
+
+    /* Class selector — stat row */
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sp-xl);
+      margin: var(--sp-xl) 0;
+      animation: fadeUp .6s .26s ease both;
+    }
+
+    .stat-item {
+      border-left: 2px solid var(--border-lit);
+      padding-left: var(--sp-md);
+    }
+
+    .stat-item .stat-val {
+      font-family: var(--font-display);
+      font-size: 1.7rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .stat-item .stat-label {
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      color: var(--text-soft);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-top: 4px;
+    }
+
+    /* Color modifier classes on stat values */
+    .val-gold     { color: var(--primary); }
+    .val-teal     { color: var(--accent); }
+    .val-hot      { color: var(--hot); }
+    .val-sky      { color: var(--sky); }
+
+    /* Class selector — chip row */
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      animation: fadeUp .6s .32s ease both;
+    }
+
+    /* Class selector — individual chips */
+    .chip {
+      padding: 7px 16px;
+      border-radius: var(--r-pill);
+      font-size: .8rem;
+      font-weight: 500;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .chip:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(0,0,0,.4);
+    }
+
+    /* Colour variant classes for chips */
+    .chip-gold    { border-color: rgba(245,166,35,.28); color: var(--primary); }
+    .chip-teal    { border-color: rgba(0,201,167,.28);  color: var(--accent); }
+    .chip-sky     { border-color: rgba(79,195,247,.28); color: var(--sky); }
+    .chip-hot     { border-color: rgba(255,78,106,.28); color: var(--hot); }
+    .chip-lav     { border-color: rgba(206,147,216,.28);color: var(--lavender); }
+
+    /* Class selector — CTA button row */
+    .cta-row {
+      display: flex;
+      gap: 14px;
+      margin-top: var(--sp-xl);
+      animation: fadeUp .6s .38s ease both;
+    }
+
+    /* Class selectors — buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--sp-sm);
+      padding: 13px 28px;
+      border-radius: var(--r-pill);
+      font-family: var(--font-body);
+      font-size: .88rem;
+      font-weight: 600;
+      transition: transform .22s, box-shadow .22s;
+      cursor: none;
+    }
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-filled {
+      background: var(--grad-gold);
+      color: #080b14;
+      box-shadow: 0 4px 20px rgba(245,166,35,.2);
+    }
+    .btn-filled:hover { box-shadow: 0 12px 36px rgba(245,166,35,.38); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border-lit);
+    }
+    .btn-outline:hover { border-color: var(--text-soft); }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       CSS CONCEPT 9 — DIVIDERS & SECTION STRUCTURE
+    ═══════════════════════════════════════════════════════════ */
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-lit), transparent);
+    }
+
+    /* Class selector — section wrapper */
+    .section {
+      padding: var(--sp-3xl) 0;
+    }
+
+    /* Class selector — section header */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-md);
+      margin-bottom: var(--sp-2xl);
+    }
+
+    .section-header .sec-num {
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      color: var(--text-xsoft);
+      letter-spacing: .12em;
+      flex-shrink: 0;
+    }
+
+    .section-header h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      background: var(--grad-full);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .section-header .h-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--border-lit), transparent);
+      margin-left: var(--sp-md);
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       CSS CONCEPT 10 — CARDS (display, position, box-shadow)
+       CSS Grid for the card grid layouts.
+       position: relative on card + absolute on decorative elements.
+    ═══════════════════════════════════════════════════════════ */
+
+    /* --- Education cards --- */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sp-lg);
+    }
+
+    .edu-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 34px 28px;
+      position: relative;        /* for absolute children */
+      overflow: hidden;
+      transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+    }
+    .edu-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 28px 64px rgba(0,0,0,.55);
+      border-color: var(--border-lit);
+      background: var(--card-hover);
+    }
+
+    /* Absolutely-positioned top accent bar */
+    .edu-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+    .edu-card.accent-gold::before { background: var(--grad-gold); }
+    .edu-card.accent-teal::before { background: var(--grad-teal); }
+
+    /* Absolutely-positioned watermark icon */
+    .edu-card .card-watermark {
+      position: absolute;
+      top: 20px; right: 20px;
+      font-size: 2rem;
+      opacity: .15;
+      pointer-events: none;
+    }
+
+    .edu-tag {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: var(--r-pill);
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      font-weight: 500;
+      margin-bottom: 14px;
+      letter-spacing: .06em;
+    }
+    .tag-gold { background: rgba(245,166,35,.1);  color: var(--primary); border: 1px solid rgba(245,166,35,.2); }
+    .tag-teal { background: rgba(0,201,167,.1);   color: var(--accent);  border: 1px solid rgba(0,201,167,.2); }
+
+    .edu-card .card-degree {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      line-height: 1.3;
+      color: var(--text);
+    }
+    .edu-card .card-inst {
+      font-size: .88rem;
+      color: var(--text-soft);
+      margin-bottom: 18px;
+    }
+    .edu-card .card-year {
+      font-family: var(--font-mono);
+      font-size: .72rem;
+      color: var(--text-xsoft);
+    }
+
+    /* Achievement highlight banner */
+    .achieve-banner {
+      margin-top: var(--sp-lg);
+      background: linear-gradient(135deg, rgba(245,166,35,.06), rgba(255,78,106,.06));
+      border: 1px solid rgba(245,166,35,.18);
+      border-radius: var(--r-lg);
+      padding: 26px 28px;
+      display: flex;
+      align-items: center;
+      gap: var(--sp-lg);
+    }
+    .achieve-icon { font-size: 2.4rem; flex-shrink: 0; }
+    .achieve-title {
+      font-family: var(--font-display);
+      font-size: .98rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+    .achieve-desc {
+      font-size: .86rem;
+      color: var(--text-soft);
+      line-height: 1.65;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       CSS CONCEPT 11 — SKILL BARS
+       CSS transitions on width create animated progress bars.
+    ═══════════════════════════════════════════════════════════ */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sp-lg);
+    }
+
+    .skill-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 28px;
+      transition: transform .25s, border-color .25s;
+    }
+    .skill-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--border-lit);
+    }
+
+    .skill-card-title {
+      font-family: var(--font-mono);
+      font-size: .75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--text-soft);
+      margin-bottom: var(--sp-lg);
+      display: flex;
+      align-items: center;
+      gap: var(--sp-sm);
+    }
+
+    .skill-row { margin-bottom: 16px; }
+    .skill-row:last-child { margin-bottom: 0; }
+
+    .skill-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 7px;
+    }
+    .skill-name {
+      font-size: .87rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+    .skill-pct {
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      color: var(--text-soft);
+    }
+
+    .skill-track {
+      height: 4px;
+      background: var(--border);
+      border-radius: var(--r-pill);
+      overflow: hidden;
+    }
+    .skill-fill {
+      height: 100%;
+      border-radius: var(--r-pill);
+      width: 0;
+      transition: width 1.3s cubic-bezier(.4, 0, .2, 1);
+    }
+    .fill-gold  { background: var(--grad-gold); }
+    .fill-teal  { background: var(--grad-teal); }
+    .fill-hot   { background: var(--grad-hot); }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       CSS CONCEPT 12 — SOFT SKILL TAGS
+       Flexbox wrapping row of styled span chips.
+    ═══════════════════════════════════════════════════════════ */
+    .soft-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: var(--sp-lg);
+    }
+
+    .soft-tag {
+      padding: 10px 20px;
+      border-radius: var(--r-md);
+      font-size: .84rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .soft-tag:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,.35);
+    }
+
+    /* Colour variants via modifier classes */
+    .st-gold { background: rgba(245,166,35,.08); border: 1px solid rgba(245,166,35,.2); color: var(--primary); }
+    .st-teal { background: rgba(0,201,167,.08);  border: 1px solid rgba(0,201,167,.2);  color: var(--accent); }
+    .st-sky  { background: rgba(79,195,247,.08); border: 1px solid rgba(79,195,247,.2); color: var(--sky); }
+    .st-hot  { background: rgba(255,78,106,.08); border: 1px solid rgba(255,78,106,.2); color: var(--hot); }
+    .st-lav  { background: rgba(206,147,216,.08);border: 1px solid rgba(206,147,216,.2);color: var(--lavender); }
+
+    /* Leadership story card */
+    .story-card {
+      margin-top: var(--sp-lg);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 28px 32px 28px 36px;
+      display: flex;
+      gap: var(--sp-lg);
+      align-items: flex-start;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Left accent stripe — position: absolute */
+    .story-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; bottom: 0;
+      width: 3px;
+      background: var(--grad-hot);
+    }
+    .story-icon { font-size: 2rem; flex-shrink: 0; margin-top: 3px; }
+    .story-title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--hot);
+      margin-bottom: 6px;
+    }
+    .story-body {
+      font-size: .87rem;
+      color: var(--text-soft);
+      line-height: 1.75;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       CSS CONCEPT 13 — HOBBY CARDS
+       CSS Grid 3-column. transform + box-shadow hover effects.
+       ::after pseudo-element glow on hover.
+    ═══════════════════════════════════════════════════════════ */
+    .hobby-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .hobby-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 30px 22px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+    }
+    .hobby-card:hover {
+      transform: translateY(-7px) rotate(-1deg);
+      box-shadow: 0 30px 70px rgba(0,0,0,.55);
+      border-color: var(--border-lit);
+    }
+
+    /* Glow overlay — hidden by default, shown on hover */
+    .hobby-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity .3s;
+      pointer-events: none;
+    }
+    .hobby-card:hover::after { opacity: 1; }
+
+    /* Per-card glow colors via modifier classes */
+    .hc-gold::after    { background: radial-gradient(circle at 50% 0%, rgba(245,166,35,.1),  transparent 70%); }
+    .hc-teal::after    { background: radial-gradient(circle at 50% 0%, rgba(0,201,167,.1),   transparent 70%); }
+    .hc-hot::after     { background: radial-gradient(circle at 50% 0%, rgba(255,78,106,.1),  transparent 70%); }
+    .hc-sky::after     { background: radial-gradient(circle at 50% 0%, rgba(79,195,247,.1),  transparent 70%); }
+    .hc-lav::after     { background: radial-gradient(circle at 50% 0%, rgba(206,147,216,.1), transparent 70%); }
+
+    .hobby-emoji {
+      display: block;
+      font-size: 2.8rem;
+      margin-bottom: 14px;
+      animation: floatEmoji 3.2s ease-in-out infinite;
+    }
+    /* Different delays for staggered floating */
+    .hobby-card:nth-child(2) .hobby-emoji { animation-delay: -.6s; }
+    .hobby-card:nth-child(3) .hobby-emoji { animation-delay: -1.2s; }
+    .hobby-card:nth-child(4) .hobby-emoji { animation-delay: -1.8s; }
+    .hobby-card:nth-child(5) .hobby-emoji { animation-delay: -2.4s; }
+    .hobby-card:nth-child(6) .hobby-emoji { animation-delay: -3s; }
+
+    @keyframes floatEmoji {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-8px); }
+    }
+
+    .hobby-title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+    .hobby-desc {
+      font-size: .8rem;
+      color: var(--text-soft);
+      line-height: 1.65;
+      margin-bottom: 14px;
+    }
+
+    .hobby-badge {
+      display: inline-block;
+      padding: 3px 12px;
+      border-radius: var(--r-pill);
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      font-weight: 500;
+    }
+    .hb-gold { background: rgba(245,166,35,.1); color: var(--primary); }
+    .hb-teal { background: rgba(0,201,167,.1);  color: var(--accent); }
+    .hb-hot  { background: rgba(255,78,106,.1); color: var(--hot); }
+    .hb-sky  { background: rgba(79,195,247,.1); color: var(--sky); }
+    .hb-lav  { background: rgba(206,147,216,.1);color: var(--lavender); }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       CSS CONCEPT 14 — VOLUNTEERING CARD
+    ═══════════════════════════════════════════════════════════ */
+    .vol-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 38px 36px;
+      display: flex;
+      gap: var(--sp-xl);
+      align-items: flex-start;
+      position: relative;
+      overflow: hidden;
+      transition: transform .28s, border-color .28s;
+    }
+    .vol-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-lit);
+    }
+    /* Teal glow bottom-left */
+    .vol-card::before {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: -60px;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(0,201,167,.08), transparent 70%);
+      pointer-events: none;
+    }
+
+    .vol-logo {
+      width: 62px; height: 62px;
+      border-radius: var(--r-md);
+      flex-shrink: 0;
+      background: linear-gradient(135deg, rgba(0,201,167,.14), rgba(79,195,247,.14));
+      border: 1px solid rgba(0,201,167,.22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.9rem;
+    }
+
+    .vol-org {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    .vol-role {
+      font-family: var(--font-mono);
+      font-size: .72rem;
+      color: var(--text-soft);
+      letter-spacing: .07em;
+      margin-bottom: 14px;
+    }
+    .vol-desc {
+      font-size: .88rem;
+      color: var(--text-soft);
+      line-height: 1.75;
+    }
+
+    .vol-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: var(--sp-md);
+    }
+    .vol-tag {
+      padding: 4px 13px;
+      border-radius: var(--r-pill);
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      font-weight: 500;
+      background: rgba(0,201,167,.08);
+      border: 1px solid rgba(0,201,167,.18);
+      color: var(--accent);
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       CSS CONCEPT 15 — CONTACT SECTION
+       CSS Grid two-column contact links.
+    ═══════════════════════════════════════════════════════════ */
+    #contact-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: 52px;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Decorative gradient corner */
+    #contact-box::after {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 260px; height: 260px;
+      background: radial-gradient(circle, rgba(245,166,35,.07), transparent 70%);
+      pointer-events: none;
+    }
+
+    #contact-box .contact-headline {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 8px;
+    }
+    #contact-box .contact-sub {
+      font-size: .95rem;
+      color: var(--text-soft);
+      margin-bottom: var(--sp-xl);
+    }
+
+    .contact-links-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .c-link {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 22px;
+      border-radius: var(--r-md);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--text);
+      transition: transform .22s, box-shadow .22s, border-color .22s;
+    }
+    .c-link:hover { transform: translateY(-2px); }
+
+    .c-link-icon {
+      width: 44px; height: 44px;
+      border-radius: var(--r-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+
+    .c-link.link-email .c-link-icon { background: rgba(255,78,106,.1); }
+    .c-link.link-email:hover { border-color: rgba(255,78,106,.35); box-shadow: 0 12px 32px rgba(255,78,106,.1); }
+
+    .c-link.link-linkedin .c-link-icon { background: rgba(79,195,247,.1); }
+    .c-link.link-linkedin:hover { border-color: rgba(79,195,247,.35); box-shadow: 0 12px 32px rgba(79,195,247,.1); }
+
+    .c-link-label {
+      font-family: var(--font-mono);
+      font-size: .66rem;
+      color: var(--text-xsoft);
+      text-transform: uppercase;
+      letter-spacing: .09em;
+      margin-bottom: 3px;
+    }
+    .c-link-val {
+      font-size: .85rem;
+      font-weight: 500;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       CSS CONCEPT 16 — FOOTER
+       Text alignment, spacing, font styling.
+    ═══════════════════════════════════════════════════════════ */
+    #site-footer {
+      text-align: center;
+      padding: var(--sp-xl) 0;
+      border-top: 1px solid var(--border);
+      font-family: var(--font-mono);
+      font-size: .72rem;
+      color: var(--text-xsoft);
+      letter-spacing: .06em;
+    }
+    #site-footer .footer-name {
+      background: var(--grad-gold);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 500;
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       CSS CONCEPT 17 — SCROLL REVEAL ANIMATION
+       CSS transitions triggered by JS-added class ".visible"
+    ═══════════════════════════════════════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       CSS CONCEPT 18 — RESPONSIVE (MEDIA QUERIES)
+    ═══════════════════════════════════════════════════════════ */
+    @media (max-width: 700px) {
+      .edu-grid, .skills-grid { grid-template-columns: 1fr; }
+      .hobby-grid { grid-template-columns: 1fr; }
+      .contact-links-grid { grid-template-columns: 1fr; }
+      .nav-list { gap: var(--sp-md); }
+      #contact-box { padding: var(--sp-xl) var(--sp-lg); }
+      .vol-card { flex-direction: column; }
+    }
+    @media (min-width: 701px) and (max-width: 900px) {
+      .hobby-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Background elements -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+  <div class="blob" id="blob-gold"></div>
+  <div class="blob" id="blob-teal"></div>
+  <div class="blob" id="blob-hot"></div>
+
+  <div class="page-wrapper">
+
+    <!-- ── NAVBAR ── (CSS: sticky position, flexbox, backdrop-filter) -->
+    <nav id="navbar">
+      <div id="nav-logo">VP ✦</div>
+      <ul class="nav-list">
+        <li><a href="#education"    class="nav-link">Education</a></li>
+        <li><a href="#skills"       class="nav-link">Skills</a></li>
+        <li><a href="#hobbies"      class="nav-link">Hobbies</a></li>
+        <li><a href="#volunteering" class="nav-link">Volunteering</a></li>
+        <li><a href="#contact"      class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+
+
+    <!-- ── HERO ── (CSS: flexbox column, clamp() font, gradient text) -->
+    <section id="hero">
+      <div class="hero-badge">
+        <div class="badge-dot"></div>
+        Student &amp; Aspiring Entrepreneur · Pune, India
+      </div>
+
+      <h1 id="hero-heading">
+        <span class="line-plain">Vasistha</span>
+        <span class="line-gradient">Pandey.</span>
+      </h1>
+
+      <p class="hero-sub">
+        A curious and driven business student pursuing dual degrees at
+        <strong>IIM Bangalore</strong> &amp; <strong>BMCC Pune</strong>.
+        Passionate about entrepreneurship, leadership, and making a
+        meaningful difference — one step at a time.
+      </p>
+
+      <div class="stat-row">
+        <div class="stat-item">
+          <div class="stat-val val-gold">🥇 1st</div>
+          <div class="stat-label">Board Rank — 12th</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val val-teal">2</div>
+          <div class="stat-label">Degrees in Parallel</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val val-hot">NSS</div>
+          <div class="stat-label">Active Volunteer</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-val val-sky">2028</div>
+          <div class="stat-label">Expected Graduation</div>
+        </div>
+      </div>
+
+      <div class="chip-row">
+        <span class="chip chip-gold">📍 Pune, India</span>
+        <span class="chip chip-teal">🎓 IIM Bangalore</span>
+        <span class="chip chip-sky">📚 BMCC Pune</span>
+        <span class="chip chip-hot">🏆 Board Topper</span>
+        <span class="chip chip-lav">🤝 NSS Volunteer</span>
+      </div>
+
+      <div class="cta-row">
+        <a href="mailto:vasistha3011@gmail.com" class="btn btn-filled">📩 Get in Touch</a>
+        <a href="https://www.linkedin.com/in/vasistha-pandey-b815a2385" target="_blank" class="btn btn-outline">LinkedIn →</a>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+
+    <!-- ── EDUCATION ── -->
+    <section id="education" class="section">
+      <div class="section-header reveal">
+        <span class="sec-num">01 /</span>
+        <h2>Education</h2>
+        <div class="h-line"></div>
+      </div>
+
+      <div class="edu-grid">
+        <div class="edu-card accent-gold reveal">
+          <span class="card-watermark">🏛️</span>
+          <div class="edu-tag tag-gold">IIM Bangalore</div>
+          <div class="card-degree">BBA — Digital Business &amp; Entrepreneurship</div>
+          <div class="card-inst">Indian Institute of Management, Bangalore</div>
+          <div class="card-year">📅 2025 — 2028</div>
+        </div>
+
+        <div class="edu-card accent-teal reveal" style="transition-delay:.12s">
+          <span class="card-watermark">📖</span>
+          <div class="edu-tag tag-teal">BMCC Pune</div>
+          <div class="card-degree">B.Com Honours</div>
+          <div class="card-inst">Brihan Maharashtra College of Commerce, Pune</div>
+          <div class="card-year">📅 2025 — 2029</div>
+        </div>
+      </div>
+
+      <div class="achieve-banner reveal" style="transition-delay:.22s">
+        <div class="achieve-icon">🥇</div>
+        <div>
+          <div class="achieve-title">Board Topper — 12th Class HSC Exams</div>
+          <div class="achieve-desc">
+            Secured <strong>1st Rank</strong> in Junior College (12th Board Results) — a
+            testament to consistent hard work, focus, and academic excellence.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+
+    <!-- ── SKILLS ── -->
+    <section id="skills" class="section">
+      <div class="section-header reveal">
+        <span class="sec-num">02 /</span>
+        <h2>Skills</h2>
+        <div class="h-line"></div>
+      </div>
+
+      <div class="skills-grid">
+        <div class="skill-card reveal">
+          <div class="skill-card-title">🖥️ Microsoft Office Suite</div>
+
+          <div class="skill-row">
+            <div class="skill-meta"><span class="skill-name">Microsoft PowerPoint</span><span class="skill-pct">85%</span></div>
+            <div class="skill-track"><div class="skill-fill fill-gold" data-w="85"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-meta"><span class="skill-name">Microsoft Excel</span><span class="skill-pct">80%</span></div>
+            <div class="skill-track"><div class="skill-fill fill-gold" data-w="80"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-meta"><span class="skill-name">Microsoft Word</span><span class="skill-pct">90%</span></div>
+            <div class="skill-track"><div class="skill-fill fill-gold" data-w="90"></div></div>
+          </div>
+        </div>
+
+        <div class="skill-card reveal" style="transition-delay:.12s">
+          <div class="skill-card-title">🎨 Design &amp; Finance</div>
+
+          <div class="skill-row">
+            <div class="skill-meta"><span class="skill-name">Canva</span><span class="skill-pct">88%</span></div>
+            <div class="skill-track"><div class="skill-fill fill-teal" data-w="88"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-meta"><span class="skill-name">Financial Literacy</span><span class="skill-pct">82%</span></div>
+            <div class="skill-track"><div class="skill-fill fill-teal" data-w="82"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-meta"><span class="skill-name">Financial Management</span><span class="skill-pct">78%</span></div>
+            <div class="skill-track"><div class="skill-fill fill-teal" data-w="78"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Soft skills -->
+      <div class="soft-row reveal" style="transition-delay:.2s">
+        <span class="soft-tag st-gold">🧠 Leadership</span>
+        <span class="soft-tag st-hot">⏱️ Time Management</span>
+        <span class="soft-tag st-sky">🔄 Adaptability</span>
+        <span class="soft-tag st-teal">💰 Financial Management</span>
+        <span class="soft-tag st-lav">🤝 Team Collaboration</span>
+      </div>
+
+      <!-- Leadership story -->
+      <div class="story-card reveal" style="transition-delay:.28s">
+        <div class="story-icon">🏆</div>
+        <div>
+          <div class="story-title">Leadership in Action</div>
+          <div class="story-body">
+            Led my junior college team to the <strong>semi-finals of an Inter-College Tournament</strong> —
+            demonstrating real on-ground leadership, team coordination, and the ability to motivate
+            and guide peers under pressure. This experience shaped my confidence and people
+            management skills significantly.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+
+    <!-- ── HOBBIES ── -->
+    <section id="hobbies" class="section">
+      <div class="section-header reveal">
+        <span class="sec-num">03 /</span>
+        <h2>Hobbies &amp; Interests</h2>
+        <div class="h-line"></div>
+      </div>
+
+      <div class="hobby-grid">
+        <div class="hobby-card hc-sky reveal">
+          <span class="hobby-emoji">🏊</span>
+          <div class="hobby-title">Swimming</div>
+          <div class="hobby-desc">My favourite physical activity. Swimming keeps me disciplined, calm, and at my physical best.</div>
+          <span class="hobby-badge hb-sky">Favourite Sport</span>
+        </div>
+
+        <div class="hobby-card hc-hot reveal" style="transition-delay:.08s">
+          <span class="hobby-emoji">🏏</span>
+          <div class="hobby-title">Watching Sports</div>
+          <div class="hobby-desc">Avid fan of Cricket, Football, Tennis &amp; Badminton. I love analysing the game beyond just watching it.</div>
+          <span class="hobby-badge hb-hot">Sports Fan</span>
+        </div>
+
+        <div class="hobby-card hc-lav reveal" style="transition-delay:.16s">
+          <span class="hobby-emoji">🎵</span>
+          <div class="hobby-title">Old Bollywood Music</div>
+          <div class="hobby-desc">The golden era of Bollywood is timeless. Pure melody and soul — my perfect way to unwind.</div>
+          <span class="hobby-badge hb-lav">Music Lover</span>
+        </div>
+
+        <div class="hobby-card hc-gold reveal" style="transition-delay:.24s">
+          <span class="hobby-emoji">🧭</span>
+          <div class="hobby-title">Exploring New Things</div>
+          <div class="hobby-desc">Curiosity drives me. Every new idea, place, or experience shapes who I become.</div>
+          <span class="hobby-badge hb-gold">Curious Mind</span>
+        </div>
+
+        <div class="hobby-card hc-teal reveal" style="transition-delay:.32s">
+          <span class="hobby-emoji">⚽</span>
+          <div class="hobby-title">Playing Sports</div>
+          <div class="hobby-desc">Competitive at heart. Sports have taught me resilience, teamwork, and never giving up.</div>
+          <span class="hobby-badge hb-teal">Active &amp; Competitive</span>
+        </div>
+
+        <div class="hobby-card hc-sky reveal" style="transition-delay:.40s">
+          <span class="hobby-emoji">🌍</span>
+          <div class="hobby-title">Social Awareness</div>
+          <div class="hobby-desc">Involved in NSS community work. Giving back to society is something I genuinely care about.</div>
+          <span class="hobby-badge hb-sky">Community First</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+
+    <!-- ── VOLUNTEERING ── -->
+    <section id="volunteering" class="section">
+      <div class="section-header reveal">
+        <span class="sec-num">04 /</span>
+        <h2>Volunteering</h2>
+        <div class="h-line"></div>
+      </div>
+
+      <div class="vol-card reveal">
+        <div class="vol-logo">🌱</div>
+        <div>
+          <div class="vol-org">National Service Scheme (NSS)</div>
+          <div class="vol-role">Active Volunteer · Ongoing</div>
+          <div class="vol-desc">
+            As a proud NSS volunteer, I actively participate in a wide range of community-driven
+            activities — from awareness campaigns and cleanliness drives to social outreach programs.
+            NSS has deepened my empathy, strengthened my sense of civic responsibility, and given
+            me hands-on experience in organising impactful social initiatives.
+          </div>
+          <div class="vol-tags">
+            <span class="vol-tag">Community Service</span>
+            <span class="vol-tag">Social Outreach</span>
+            <span class="vol-tag">Awareness Campaigns</span>
+            <span class="vol-tag">Civic Responsibility</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+
+    <!-- ── CONTACT ── -->
+    <section id="contact" class="section">
+      <div class="section-header reveal">
+        <span class="sec-num">05 /</span>
+        <h2>Contact</h2>
+        <div class="h-line"></div>
+      </div>
+
+      <div id="contact-box" class="reveal">
+        <div class="contact-headline">Let's connect! 👋</div>
+        <p class="contact-sub">Always open for a good conversation — opportunities, ideas, or just life.</p>
+        <div class="contact-links-grid">
+          <a href="mailto:vasistha3011@gmail.com" class="c-link link-email">
+            <div class="c-link-icon">📧</div>
+            <div>
+              <div class="c-link-label">Email</div>
+              <div class="c-link-val">vasistha3011@gmail.com</div>
+            </div>
+          </a>
+          <a href="https://www.linkedin.com/in/vasistha-pandey-b815a2385" target="_blank" class="c-link link-linkedin">
+            <div class="c-link-icon">🔗</div>
+            <div>
+              <div class="c-link-label">LinkedIn</div>
+              <div class="c-link-val">Vasistha Pandey</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /.page-wrapper -->
+
+
+  <!-- ── FOOTER ── -->
+  <footer id="site-footer">
+    Crafted with ❤️ for <span class="footer-name">Vasistha Pandey</span> · Pune, India · 2025
+  </footer>
+
+
+  <script>
+    /* ── Custom cursor ── */
+    const dot  = document.getElementById('cursor-dot');
+    const ring = document.getElementById('cursor-ring');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    (function tick() {
+      dot.style.left = mx + 'px';
+      dot.style.top  = my + 'px';
+      rx += (mx - rx) * .12;
+      ry += (my - ry) * .12;
+      ring.style.left = rx + 'px';
+      ring.style.top  = ry + 'px';
+      requestAnimationFrame(tick);
+    })();
+
+    /* ── Scroll reveal ── */
+    const revealIO = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => revealIO.observe(el));
+
+    /* ── Skill bar animation on scroll ── */
+    const barIO = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.querySelectorAll('.skill-fill').forEach(bar => {
+            bar.style.width = bar.dataset.w + '%';
+          });
+        }
+      });
+    }, { threshold: 0.3 });
+    document.querySelectorAll('.skill-card').forEach(c => barIO.observe(c));
+  </script>
+
+</body>
+</html>
